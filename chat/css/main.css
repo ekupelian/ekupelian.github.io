@@ -1,0 +1,61 @@
+
+
+/* ==========================================================================
+   Kupe's custom styles
+   ========================================================================== */
+#wrap {
+width:750px;
+margin:0 auto;
+background:#99c;
+}
+#main {
+float:left;
+width:500px;
+background:#9c9;
+}
+#sidebar {
+float:right;
+width:250px;
+background:#c9c;
+}
+#clear {
+clear:both;
+background:#cc9;
+}
+#messagesList {
+background: #ddd;
+}
+#messagesList em {
+font-style: normal;
+font-weight: bold;
+}
+.userOnine {
+color: #000;
+font-style: normal;
+}
+.userAway {
+color: rgba(61, 60, 46, 0.73);
+font-style: italic;
+}
+
+/* Markdown fix*/
+#messagesList div p,h1,h2 {
+display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
