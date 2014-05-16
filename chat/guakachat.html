@@ -8,8 +8,13 @@
         <meta name="description" content="El chat mas feo que vi en mi vida ... pero puro JS">
     </head>
     <body>
-    
-    	
+        <ul>
+            <li><a href="#" onclick="javascript:GHlogin()">Login using GitHub</a></li>
+            <li><a href="#" onclick="javascript:GOOGLlogin()">Login using Google</a></li>
+            <li></li>
+            <li><a href="#" onclick="javascript:auth.logout()">Logout</a></li>
+        </ul>    
+   	    
 	    <script type='text/javascript'  src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
 		<script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
 	    <script type='text/javascript'  src='js/vendor/jquery-1.11.0.min.js'></script>
@@ -31,10 +36,19 @@
               }
             });
 
-            auth.login('github', {
-              //rememberMe: true,
-              scope: 'user,gist'
-            });
+            function GHlogin() {
+                auth.login('github', {
+                    //rememberMe: true, // Override default session length (browser session) to be 30 days
+                    scope: 'user,gist'  // A comma-delimited list of requested extended permissions. See http://developer.github.com/v3/oauth/#scopes
+                });
+            }
+            function GOOGLlogin() {
+                auth.login('google', {
+                    //rememberMe: true, // Override default session length (browser session) to be 30 days
+                    scope: 'https://www.googleapis.com/auth/plus.profile.emails.read' // A comma-delimited list of requested extended permissions. See https://developers.google.com/+/api/oauth
+                });
+            }
+
         </script>
     </body>
 </html>
