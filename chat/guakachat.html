@@ -20,6 +20,8 @@
 	    <script type='text/javascript'  src='js/vendor/jquery-1.11.0.min.js'></script>
         <script type="text/javascript">
             var chatRef = new Firebase('https://blistering-fire-3276.firebaseio.com');
+            var userRef = new Firebase('https://blistering-fire-3276.firebaseio.com/users');
+
             var auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
               if (error) {
                 // an error occurred while attempting login
@@ -31,6 +33,11 @@
                 console.log(user);
                 console.log('VAR::auth');
                 console.log(auth);
+
+                // Generate a reference to a new location for my user with push.
+                var myUserRef = usersRef.push();
+                myUserRef.set(user);
+
               } else {
                 // user is logged out
               }
