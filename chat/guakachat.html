@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta content="noindex, follow" name="robots" />
+
+        <title>Guakala Chat</title>
+        <meta name="description" content="El chat mas feo que vi en mi vida ... pero puro JS">
+    </head>
+    <body>
+    
+    	
+	    <script type='text/javascript'  src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+		<script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
+	    <script type='text/javascript'  src='js/vendor/jquery-1.11.0.min.js'></script>
+        <script type="text/javascript">
+            var chatRef = new Firebase('https://blistering-fire-3276.firebaseio.com');
+            var auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
+              if (error) {
+                // an error occurred while attempting login
+                console.log(error);
+              } else if (user) {
+                // user authenticated with Firebase
+                console.log('User ID: ' + user.uid + ', Provider: ' + user.provider);
+              } else {
+                // user is logged out
+              }
+            });
+
+            auth.login('github');
+        </script>
+    </body>
+</html>

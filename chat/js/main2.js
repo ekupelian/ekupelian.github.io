@@ -1,6 +1,8 @@
 //TODO
 // Notify in message List connects/disconnects
 // Notify in message List own away status
+// Markdown no maneja super bien los links
+// Agregar Highlight.js http://highlightjs.org/ (?)
 
 
 
@@ -34,6 +36,10 @@ marked.setOptions({
       var USERS_URI     = 'https://blistering-fire-3276.firebaseio.com/users';
       var CONNECTED_URI = 'https://blistering-fire-3276.firebaseio.com/.info/connected';
 
+      var inputElement = '#msgInput';
+      var messagesElement = '.messages-wrapper';
+      var usersListElement = '#usersWindow ul'
+
       var currentStatus = "online";
 
       var messagesRef = new Firebase(MESSAGES_URI);
@@ -44,10 +50,10 @@ marked.setOptions({
 
 	$(document).ready(function(){
       // When the user presses enter on the message input, write the message to firebase.
-      $('#messageInput').keypress(function (e) {
+      $(inputElement).keypress(function (e) {
         if (e.keyCode == 13) {
 //          var name = $('#nameInput').val();
-          var text = $('#messageInput').val();
+          var text = $(inputElement).val();
           var timestamp = Math.round(+new Date()/1000);
           // Push data TODO: Add timestamp ?
           messagesRef.push({name:name, text:text, ts:timestamp},  function(error) {
@@ -57,26 +63,21 @@ marked.setOptions({
               //console.log('Send OK');
             }
           });
-          $('#messageInput').val('');
+          $(inputElement).val('');
         }
       });
      });
+  
       // Add a callback that is triggered for each chat message.
       messagesRef.limit(10).on('child_added', function (snapshot) {
         var message = snapshot.val();
-        // Convert text2links
-        //var msg = convertToLinks(message.text);
-        // Markdown FTW (?)
-        var msg = marked(message.text);
+        var messageMarkdown = marked(message.text);
         var ts = timestampToDate(message.ts);
-        /*
-        TODO: 
-          Markdown no maneja super bien los links
-          Agregar Highlight.js http://highlightjs.org/ (?)
-        */
-        $('<div/>').html(msg).prepend($('<em/>')
-          .text(ts + message.name+': ')).appendTo($('#messagesList'));
-        $('#messagesList')[0].scrollTop = $('#messagesList')[0].scrollHeight;
+        var msgTpl = '<div class="talk-bubble tri-right left-top"><div class="talktext"><div>{CHANNEL}::<strong>{UserName}</strong>:</div>{Message}</div></div>';
+        msgTpl = msgTpl.replace('{UserName}', message.name);        
+        msgTpl = msgTpl.replace('{Message}', messageMarkdown);        
+        $(msgTpl).appendTo($(messagesElement));
+        $(messagesElement)[0].scrollTop = $(messagesElement)[0].scrollHeight;
       });
 
   // Get a reference to my own presence status.
@@ -104,48 +105,39 @@ marked.setOptions({
     myUserRef.set({ name: name, status: status });
   }
 
-
   // Update our GUI to show someone"s online status.
   usersRef.on("child_added", function(snapshot) {
     var user = snapshot.val();
-    $("#userList").append($("<div/>").attr("id", snapshot.name()));
+    $(usersListElement).append($("<li/>").attr("id", snapshot.name()));
 
     if (user.status == "idle") {
-        $("#" + snapshot.name()).addClass('userAway');
+      $("#" + snapshot.name()).html('<span class="entypo-moon"></span>' + user.name);
+    } else {
+      $("#" + snapshot.name()).html('<span class="entypo-eye"></span>' + user.name);
     }
-    $("#" + snapshot.name()).text('#' + user.name);
-  });
 
-  // Update our GUI to remove the status of a user who has left.
-  usersRef.on("child_removed", function(snapshot) {
-    $("#" + snapshot.name()).remove();
+    $(messagesElement).append('<div class="wentOffline">--- <span class="entypo-user-add"></span> '+user.name+' está online '+getTS()+'</div>');
+    $(messagesElement)[0].scrollTop = $(messagesElement)[0].scrollHeight;
   });
 
   // Update our GUI to change a user"s status.
   usersRef.on("child_changed", function(snapshot) {
     var user = snapshot.val();
-    $("#" + snapshot.name()).text('#' + user.name).toggleClass('userAway');
+    if (user.status == "idle") {
+      $("#" + snapshot.name()).html('<span class="entypo-moon"></span>' + user.name);
+    } else {
+      $("#" + snapshot.name()).html('<span class="entypo-eye"></span>' + user.name);
+    }
+  });
+
+  // Update our GUI to remove the status of a user who has left.
+  usersRef.on("child_removed", function(snapshot) {
+    $("#" + snapshot.name()).remove();
+    $(messagesElement).append('<div class="wentOffline">--- '+snapshot.val().name+' se desconectó '+getTS()+'</div>');
+    $(messagesElement)[0].scrollTop = $(messagesElement)[0].scrollHeight;
   });
 
 /* ################### */
-
-/* http://www.jontetzlaff.com/blog/2012/08/23/converting-string-urls-to-clickable-links-with-javascript/ */
-function convertToLinks(text) {
-  var replaceText, replacePattern1;
-
-  //URLs starting with http://, https://
-  replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])/ig;
-  replacedText = text.replace(replacePattern1, '<a class="colored-link-1" title="$1" href="$1" target="_blank">$1</a>');
-
-  //URLs starting with "www."
-  replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
-  replacedText = replacedText.replace(replacePattern2, '$1<a class="colored-link-1" href="http://$2" target="_blank">$2</a>');
-
-  //TODO: catch subdomains
-
-  //returns the text result
-  return replacedText;
-}
 
 function timestampToDate(unix_ts) {
     var date    = new Date(unix_ts * 1000);
@@ -191,7 +183,7 @@ function getTS() {
     if(minute.toString().length == 1) {
         var minute = '0'+minute;
     }
-    var dateTime = '['+year+'/'+month+'/'+day+' '+hour+':'+minute+'] ';
+    var dateTime = '['+year+'/'+month+'/'+day+' '+hour+':'+minute+']';
     return dateTime;
 }
 
