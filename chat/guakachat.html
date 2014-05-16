@@ -22,12 +22,19 @@
               } else if (user) {
                 // user authenticated with Firebase
                 console.log('User ID: ' + user.uid + ', Provider: ' + user.provider);
+                console.log('VAR::user');
+                console.log(user);
+                console.log('VAR::auth');
+                console.log(auth);
               } else {
                 // user is logged out
               }
             });
 
-            auth.login('github');
+            auth.login('github', {
+              //rememberMe: true,
+              scope: 'user,gist'
+            });
         </script>
     </body>
 </html>
