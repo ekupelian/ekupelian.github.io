@@ -32,7 +32,7 @@
                 console.log(user);
 
                 // Belongs to Lyracons ?
-                var domain = $(user.email+'').split('@')[1];
+                var domain = user.email.split('@')[1];
                 if (domain === 'lyracons.com') {
                     console.log('AUTHORIZED');
                 } else {
