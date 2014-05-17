@@ -9,15 +9,14 @@
     </head>
     <body>
         <ul>
-            <li><a href="#" onclick="javascript:GHlogin()">Login using GitHub</a></li>
-            <li><a href="#" onclick="javascript:GOOGLlogin()">Login using Google</a></li>
-            <li></li>
-            <li><a href="#" onclick="javascript:auth.logout()">Logout</a></li>
+            <li><a href="#" onclick="javascript:GitHubOAuthLogin()">Login using GitHub</a></li>
+            <li><a href="#" onclick="javascript:GoogleOAuthLogin()">Login using Google</a></li>
+            <li><a href="#" onclick="javascript:logout()">Logout</a></li>
         </ul>    
    	    
-	    <script type='text/javascript'  src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+	    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
 		<script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
-	    <script type='text/javascript'  src='js/vendor/jquery-1.11.0.min.js'></script>
+	    <script type='text/javascript' src='js/vendor/jquery-1.11.0.min.js'></script>
         <script type="text/javascript">
             var chatRef = new Firebase('https://blistering-fire-3276.firebaseio.com');
             var usersRef = new Firebase('https://blistering-fire-3276.firebaseio.com/users');
@@ -31,29 +30,40 @@
                 console.log('User ID: ' + user.uid + ', Provider: ' + user.provider);
                 console.log('VAR::user');
                 console.log(user);
-                console.log('VAR::auth');
-                console.log(auth);
 
                 // Generate a reference to a new location for my user with push.
                 var myUserRef = usersRef.push();
+                // Mark ourselves as online
+                user.status = 'online';
+
                 myUserRef.set(user);
+                myUserRef.onDisconnect().remove();
 
               } else {
                 // user is logged out
+                console.log('NOT LOGGED IN');
               }
             });
 
-            function GHlogin() {
+            function GitHubOAuthLogin() {
                 auth.login('github', {
                     //rememberMe: true, // Override default session length (browser session) to be 30 days
                     scope: 'user,gist'  // A comma-delimited list of requested extended permissions. See http://developer.github.com/v3/oauth/#scopes
                 });
             }
-            function GOOGLlogin() {
+            function GoogleOAuthLogin() {
                 auth.login('google', {
                     //rememberMe: true, // Override default session length (browser session) to be 30 days
                     scope: 'https://www.googleapis.com/auth/plus.profile.emails.read' // A comma-delimited list of requested extended permissions. See https://developers.google.com/+/api/oauth
                 });
+            }
+
+            function logout() {
+                auth.logout();
+                //myUserRef.onDisconnect().remove();
+                console.log("Logout");
+                console.log('User:'+user)
+
             }
 
         </script>
