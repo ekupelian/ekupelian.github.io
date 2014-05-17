@@ -31,6 +31,14 @@
                 console.log('VAR::user');
                 console.log(user);
 
+                // Belongs to Lyracons ?
+                var domain = $(user.email).split(@)[1];
+                if (domain === 'lyracons.com') {
+                    console.log('AUTHORIZED');
+                } else {
+                    console.log('ACCESS DENIED');
+                }
+
                 // Generate a reference to a new location for my user with push.
                 var myUserRef = usersRef.push();
                 // Mark ourselves as online
