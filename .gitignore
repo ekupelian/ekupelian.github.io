@@ -1,2 +1,4 @@
 chat/guaka.chat.sublime-project
 chat/guaka.chat.sublime-workspace
+*.sublime-project
+*.sublime-workspace
