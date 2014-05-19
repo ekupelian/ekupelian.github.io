@@ -1,0 +1,462 @@
+/*
+ * Author: Carlos Alvarez
+ * URL: http://alvarez.is
+ *
+ * Project Name: STANLEY - Free Bootstrap 3 Theme
+ * Version: 1.0
+ * URL: http://blacktie.co
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body {
+  	background-color: #2f2f2f;
+  	font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #555;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Titles */
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #333;
+}
+
+h1 {
+	font-size: 35px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+
+
+/* Paragraph & Typographic */
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #1abc9c;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+.navbar {
+	text-transform: uppercase;
+	margin-bottom: 0px;
+}
+
+.navbar-inverse {
+	background-color: #B1B1B1;
+	border-color: #707070;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: white;
+	margin-top: 8px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+	color: #222222;
+}
+
+.navbar-brand {
+	font-weight: 700;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+	position: relative;
+	padding-bottom: 14px !important;
+}
+
+.navbar-inverse .navbar-brand img {
+	width: 120px;
+}
+
+.navbar-inverse .navbar-toggle {
+	border-color: transparent;
+	margin-top: 16px !important;
+}
+
+.progress-bar-theme {
+  background-color: #1abc9c;
+}
+
+
+/* Helpers */
+
+.mt {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.pt {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+
+/* +++++ WRAP SECTIONS +++++ */
+
+#ww {
+	padding-top: 70px;
+	padding-bottom: 70px;
+	background-color: #f2f2f2;
+}
+
+
+#footer {
+	background-color: #2f2f2f;
+	padding-top: 10px;
+}
+
+#footer p {
+	color: white;
+	font-size: 10px;
+	margin-bottom: 10px !important;
+}
+
+#footer h4 {
+	color: white;
+	text-transform: uppercase;
+	padding-bottom: 20px;
+}
+
+
+/* +++++ Color Wraps / Blog Page +++++ */
+
+#grey {
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background-color: #f2f2f2;
+}
+
+#white {
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background-color: #ffffff;
+}
+
+
+
+/* Blog Date*/
+bd {
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #d2d2d2;
+	font-weight: 700;
+}
+
+/* Blog Author*/
+ba {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+/* Blog Quote */
+.bq {
+	font-size: 22px;
+	padding-top: 30px;
+}
+
+/* Blog Tags */
+bt {
+	font-size: 12px;
+}
+
+/* ================== PORTFOLIO IMAGES HOVER EFFECT ================== */
+/* Effects also are controled by hover.zoom.js */
+.zoom { 
+    display:block; 
+    position:relative; 
+    overflow:hidden; 
+    background:transparent url(../img/loader.gif) no-repeat center;
+}
+
+
+    .zoomOverlay {
+        position:absolute;
+        top:0; left:0;
+        bottom:0; right:0;
+        display:none;
+        background-image:url(../img/zoom.png);
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+
+.zoom2 {
+	opacity: 1;
+}
+
+.zoom2:hover {
+	opacity: 0.5;
+}
+
+/* glyphicon Configuration */
+
+.glyphicon {
+	font-size: 40px;
+	color: #1abc9c;
+}
+
+/* ================== Chat styles ================== */
+
+#chatwindow{
+	font-family: "Ubuntu-Italic", "Lucida Sans", helvetica, sans;
+	background-color: #f2f2f2;
+	position: relative;
+	width: auto;
+	height: 520px;
+	margin: 0 auto;
+	padding: 30px 50px 60px 50px;
+}
+.messages-wrapper{
+	height: 95%;
+	overflow-y: scroll;
+}
+#messages{
+	height: 100%;
+	overflow: auto;
+}
+#messagesWindow{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+.messageContent{
+	margin-right: 150px;
+	height: 100%;
+}
+
+.messageContent .innertube{
+	margin:0px;
+	background: #ddd;
+	height: 100%;
+	position: relative;
+}
+
+#inputcontainer{
+	position: absolute;
+	bottom: 0;
+	height: 30px;
+	width: 100%;
+	padding-top: 4px;
+}
+
+#usersWindow {
+	float: left;
+	width: 150px;
+	margin-left: -150px;
+	height: 100%;
+	font-size: .6em;
+}
+#usersWindow .innertube{
+	margin: 0px;
+	background: #FFF;
+	height: 100%;
+}
+
+#usersWindow ul{
+	margin: 0;
+	padding:0;
+	height: 329px;
+	list-style-type: none;
+}
+#usersWindow li {
+	padding: 2px;
+	font-size: 12px;
+}
+#usersWindow li span {
+	margin: 0px 2px;
+}
+
+#inputcontainer input {
+	margin-top: 1px;
+	width: 99.5%;
+	height: 22px;
+}
+
+/* CSS talk bubble */
+.talk-bubble {
+	margin-left: 24px;
+	margin-bottom: 6px;
+	display: inline-block;
+	position: relative;
+	width: 93%;
+	height: auto;
+	background-color: lightyellow;
+	padding: 2px 8px;
+	font-size: .8em
+}
+.border{
+	border: 8px solid #666;
+}
+.round{
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
+/* Right triangle placed top left flush. */
+.tri-right.border.left-top:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -40px;
+	right: auto;
+	top: -8px;
+	bottom: auto;
+	border: 32px solid;
+	border-color: #666 transparent transparent transparent;
+}
+.tri-right.left-top:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -20px;
+	right: auto;
+	top: 0px;
+	bottom: auto;
+	border: 22px solid;
+	border-color: lightyellow transparent transparent transparent;
+}
+.talktext {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.talktext div {
+	margin-left: 6px;
+	font-size: .8em;
+}
+.talktext p {
+	margin:0px;
+	line-height: 20px !important;
+	font-size: 14px !important;
+	margin-bottom: 0px !important;
+}
+
+.wentOffline {
+	font-style: italic;
+	font-size: .7em;
+	color: #888;
+	margin-bottom: 4px;
+}
+
+#chatwindow .chatTitle {
+	padding:4px;
+	background-color:#888;
+	color:#EEE;
+}
+
+#chatwindow #inputcontainer .entypo-comment {
+	position:relative;
+	left:-14px;
+}
+
+#chatwindow #usersWindow .innertube div {
+	padding:4px;
+	background-color:#888;
+	color:#EEE;
+	position:relative;
+	top:-21px;
+}
+
+#chatwindow #usersWindow .innertube ul {
+	position:relative; 
+	top:-18px;
+}
+
+@media only screen and (max-width : 840px) {
+	#chatwindow {
+		padding: 30px 0px 60px 0px !important;
+	}
+}
+
+/* ================== Kupe's custom styles ================== */
+
+#wrap {
+	width:750px;
+	margin:0 auto;
+	background:#99c;
+}
+#main {
+	float:left;
+	width:500px;
+	background:#9c9;
+}
+#sidebar {
+	float:right;
+	width:250px;
+	background:#c9c;
+}
+#clear {
+	clear:both;
+	background:#cc9;
+}
+#messagesList {
+background: #ddd;
+}
+#messagesList em {
+	font-style: normal;
+	font-weight: bold;
+}
+.userOnine {
+	color: #000;
+	font-style: normal;
+}
+.userAway {
+	color: rgba(61, 60, 46, 0.73);
+	font-style: italic;
+}
+
+/* Markdown fix*/
+	#chatwindow #messagesList div p, #chatwindow h1, #chatwindow h2 {
+	display: inline;
+}
