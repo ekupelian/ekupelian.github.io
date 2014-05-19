@@ -60,6 +60,23 @@ var GuacaChat = {
 
     },
 
+    _loggedIn:function(user) {
+        console.debug("[ACTION]::_loggedIn");
+
+        this.usersRef = new Firebase(GuacaConf.FIREBASE+GuacaConf.FB_USERS);
+/*
+        // Generate a reference to a new location for my user with push.
+        var myUserRef = usersRef.push();
+        // Mark ourselves as online
+        user.status = 'online';
+
+        myUserRef.set(user);
+        myUserRef.onDisconnect().remove();
+*/
+        $(GuacaConf.chatScreen).show();
+
+    },
+
     _handleAuth: function (error, user) {
         console.debug("[ACTION]::_handleAuth");
         if (error) {
@@ -103,23 +120,6 @@ var GuacaChat = {
     Logout:function () {
         console.debug("[ACTION]::Logout");
         this.authRef.logout();
-    },
-
-    _loggedIn:function(user) {
-        console.debug("[ACTION]::_loggedIn");
-
-        this.usersRef = new Firebase(GuacaConf.FIREBASE+GuacaConf.FB_USERS);
-/*
-        // Generate a reference to a new location for my user with push.
-        var myUserRef = usersRef.push();
-        // Mark ourselves as online
-        user.status = 'online';
-
-        myUserRef.set(user);
-        myUserRef.onDisconnect().remove();
-*/
-        $(GuacaConf.chatScreen).show();
-
     },
 
     SendMessage: function () {
