@@ -135,11 +135,15 @@ Copyright © Ohlone College. All rights reserved.</p>
 
 		GuacaChat.Init();
 
+		/* Test Mocks */
+		var objectUsr = {id: "104871138407675944013", uid: "google:104871138407675944013", displayName: "Ezequiel Kupelian", provider: "google", email: "ekupelian@lyracons.com", thirdPartyUserData: ""};
+
 		// Fire Login event
 		$("#ww .login").click(function(){
 			$("#ww").hide();
 
 			GuacaChat.Login();
+			//GuacaChat._handleAuth("",objectUsr) // Test bypass
 
 			//$("#chatwindow").show();
 			$(".messages-wrapper").height($("#messages").height()-30);

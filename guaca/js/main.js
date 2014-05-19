@@ -76,7 +76,7 @@ var GuacaChat = {
             var domain = user.email.split('@')[1];
             if (domain === 'lyracons.com') {
                 console.debug('ACCESS GRANTED');
-                this._loggedIn();
+                this._loggedIn(user);
             } else {
                 console.debug('[ACCESS DENIED]: Not a member of Lyracons');
                 $(GuacaConf.login_errors).html('ACCESS DENIED. Only Lyracons staff is allowed');
@@ -98,7 +98,6 @@ var GuacaChat = {
             //rememberMe: true, // Override default session length (browser session) to be 30 days
             scope: 'https://www.googleapis.com/auth/plus.profile.emails.read' // A comma-delimited list of requested extended permissions. See https://developers.google.com/+/api/oauth
         });
-        
     },
 
     Logout:function () {
@@ -106,11 +105,11 @@ var GuacaChat = {
         this.authRef.logout();
     },
 
-    _loggedIn:function() {
+    _loggedIn:function(user) {
         console.debug("[ACTION]::_loggedIn");
 
         this.usersRef = new Firebase(GuacaConf.FIREBASE+GuacaConf.FB_USERS);
-
+/*
         // Generate a reference to a new location for my user with push.
         var myUserRef = usersRef.push();
         // Mark ourselves as online
@@ -118,8 +117,9 @@ var GuacaChat = {
 
         myUserRef.set(user);
         myUserRef.onDisconnect().remove();
-
+*/
         $(GuacaConf.chatScreen).show();
+
     },
 
     SendMessage: function () {
