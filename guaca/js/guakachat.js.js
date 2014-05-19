@@ -1,15 +1,9 @@
-/*
-
-	×º°”˜`”°º× [ GuacaChat ] ×º°”˜`”°º×
-
-*/
-
-var GuakaConf = {
+var Conf = {
+	FIREBASE: 'https://blistering-fire-3276.firebaseio.com/',
 	DebugMode: true,
 	IdleDuration: 5,
 
 	//# FireBase channels
-	FIREBASE: 'https://blistering-fire-3276.firebaseio.com/',
 	FB_MESSAGES : 'messages',
 	FB_USERS    : 'users',
 	FB_CONNECTED: '.info/connected',
@@ -20,32 +14,10 @@ var GuakaConf = {
 	usersListElement: '#usersWindow ul'
 };
 
-/*
-var GuakaChat = (function() {
-	var variableTest;
-
-	function Init() {
-		console.debug('GuakaChat::Init');	
-	}
+function GuakaChat () {
 	
-})();
-*/
-var GuakaChat = {
-	currentUser:"",
-	Init:function () {
-		console.debug('GuakaChat::Init');	
-	},
-	Init2:function () {
-		this.Init();
-	},
-};
+}
 
-console.debug('GuakaChat::MainClass');
-GuakaChat.Init2();
-//GuakaChat.Init();
-
-/*
-// CLASES AUXILIARES
 
 function timestampToDate(unix_ts) {
     var date    = new Date(unix_ts * 1000);
@@ -95,8 +67,6 @@ function getTS() {
     return dateTime;
 }
 
-*/
-
 /*
 
 function Guakala {
@@ -121,26 +91,16 @@ function Guakala {
 
 
 
+	var User = {
+	    init: function( name ) {
+	        this.me = name;
+	    },
+	    identify: function() {
+	        console.log( "I am " + this.me );
+	    }
+	};
+
+
+
 }
-
-// Capture console.log to depend on DEBUG Flag
-(function(){                               // Closure so no other functions have direct access to oldLog
-    var oldLog = console.log;
-	console.log('
-	 ██████╗ ██╗   ██╗ █████╗  ██████╗ █████╗  ██████╗██╗  ██╗ █████╗ ████████╗
-	██╔════╝ ██║   ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║██╔══██╗╚══██╔══╝
-	██║  ███╗██║   ██║███████║██║     ███████║██║     ███████║███████║   ██║   
-	██║   ██║██║   ██║██╔══██║██║     ██╔══██║██║     ██╔══██║██╔══██║   ██║   
-	╚██████╔╝╚██████╔╝██║  ██║╚██████╗██║  ██║╚██████╗██║  ██║██║  ██║   ██║   
-	 ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
-	');
-
-    console.log = function (message) {
-        // DO MESSAGE HERE.
-        oldLog.apply(console, arguments);
-    };
-})();
-
-
-
 */

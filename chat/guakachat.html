@@ -17,6 +17,7 @@
 	    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
 		<script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
 	    <script type='text/javascript' src='js/vendor/jquery-1.11.0.min.js'></script>
+        <script type='text/javascript' src='js/classy.js'></script>
         <script type="text/javascript">
             var chatRef = new Firebase('https://blistering-fire-3276.firebaseio.com');
             var usersRef = new Firebase('https://blistering-fire-3276.firebaseio.com/users');
@@ -27,16 +28,16 @@
                 console.log(error);
               } else if (user) {
                 // user authenticated with Firebase
-                console.log('User ID: ' + user.uid + ', Provider: ' + user.provider);
-                console.log('VAR::user');
-                console.log(user);
+                console.debug('User ID: ' + user.uid + ', Provider: ' + user.provider);
+                console.debug('VAR::user');
+                console.debug(user);
 
                 // Belongs to Lyracons ?
                 var domain = user.email.split('@')[1];
                 if (domain === 'lyracons.com') {
-                    console.log('AUTHORIZED');
+                    console.debug('AUTHORIZED');
                 } else {
-                    console.log('ACCESS DENIED');
+                    console.debug('ACCESS DENIED');
                 }
 
                 // Generate a reference to a new location for my user with push.
@@ -49,7 +50,7 @@
 
               } else {
                 // user is logged out
-                console.log('NOT LOGGED IN');
+                console.debug('NOT LOGGED IN');
               }
             });
 
@@ -69,11 +70,27 @@
             function logout() {
                 auth.logout();
                 //myUserRef.onDisconnect().remove();
-                console.log("Logout");
-                console.log('User:'+user)
+                console.debug("Logout");
+                console.debug('User:'+user)
 
             }
 
+
+// Capture console.debug to depend on DEBUG Flag
+var DEBUG = true;
+if(!DEBUG){
+    if(!window.console) window.console = {};
+    var methods = ["debug"]; // ["log", "debug", "warn", "info"];
+    for(var i=0;i<methods.length;i++){
+        console[methods[i]] = function(){};
+    }
+}
+
+console.log(' ██████╗ ██╗   ██╗ █████╗  ██████╗ █████╗  ██████╗██╗  ██╗ █████╗ ████████╗\n██╔════╝ ██║   ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║██╔══██╗╚══██╔══╝\n██║  ███╗██║   ██║███████║██║     ███████║██║     ███████║███████║   ██║   \n██║   ██║██║   ██║██╔══██║██║     ██╔══██║██║     ██╔══██║██╔══██║   ██║   \n╚██████╔╝╚██████╔╝██║  ██║╚██████╗██║  ██║╚██████╗██║  ██║██║  ██║   ██║   \n ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   \n');
+        
         </script>
+
+
+        <script type='text/javascript' src='js/classy.js'></script>
     </body>
 </html>
