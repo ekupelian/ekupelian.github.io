@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="shortcut icon" href="assets/img/favicon.ico" />
+
+    <title>Lyracons CHAT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>-->
+          <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" /></a>
+        </div>
+        <!--<div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+          </ul>
+        </div>-->
+      </div>
+    </div>
+
+	<!-- +++++ Welcome Section +++++ -->
+	<div id="ww">
+	    <div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 centered">
+					<img src="assets/img/user.png" alt="Stanley">
+					<h1>Hi, I am Stanley!</h1>
+					<p>Hello everybody. I'm Stanley, a free handsome bootstrap theme coded by BlackTie.co. A really simple theme for those wanting to showcase their work with a cute & clean style.</p>
+					<p><button type="submit" class="btn btn-success login">LOGIN</button></p>
+				</div>
+			</div>
+	    </div>
+	</div>
+	
+	<!-- +++++ Chat +++++ -->
+	<div id="chatwindow" style="display: none;">
+		<div class="chatTitle"><span class="entypo-chat"></span> LyraChat v0.0.1</div>
+		<div id="messagesWindow">
+			<div class="messageContent">
+				<div class="innertube">
+					<div id="messages">
+						<div class="messages-wrapper">
+								<!-- messages -->
+								<!-- example block
+								<div class="talk-bubble tri-right left-top">
+								  <div class="talktext">
+								  	<div>{CHANNEL}::<strong>{UserName}</strong>:</div>
+								    <p>This one adds.</p>
+								  </div>
+								</div>
+								-->
+						</div>
+					</div>
+					<div id="inputcontainer"><input type="text" id="msgInput" placeholder='Decilo ...' autocomplete="off"/><span class="entypo-comment"></span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="usersWindow">
+			<div class="innertube">
+				<div>ONLINE</div>
+				<ul>
+				</ul>
+			</div>
+		</div>
+
+	</div>	
+	
+	<!-- +++++ Footer Section +++++ -->	
+	<div id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<p class="copyright">Please contact username@ohlone.edu
+with your questions, comments, and suggestions.
+
+Terms and Conditions of Use & Disclaimer.
+Copyright © Ohlone College. All rights reserved.</p>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Login core JavaScript -->
+	<script type="text/javascript">
+		$("#ww .login").click(function(){
+			$("#ww").hide();
+			$("#chatwindow").show();
+			$(".messages-wrapper").height($("#messages").height()-30);
+		 	$('.messages-wrapper')[0].scrollTop = $('.messages-wrapper')[0].scrollHeight;
+		})
+	</script>
+
+	<!-- Chat core JavaScript -->
+    <script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+    <script src='assets/js/chat/vendor/jquery-1.11.0.min.js'></script>
+    <script src='assets/js/chat/vendor/ifvisible.js'></script>
+    <script src='assets/js/chat/vendor/marked.min.js'></script>
+    <script src='assets/js/chat/main2.js'></script>
+    <script type="text/javascript">
+        var name = prompt("Your name?", "Guest")
+    </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
