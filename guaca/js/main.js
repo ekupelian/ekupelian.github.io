@@ -26,6 +26,8 @@ var GuacaChat = {
     firebaseRef : "",
     usersRef : "",
     authRef : "",
+    messagesRef : "",
+    userChatName : "",
 
     Init:function () {
         console.log(' ██████╗ ██╗   ██╗ █████╗  ██████╗ █████╗  ██████╗██╗  ██╗ █████╗ ████████╗\n██╔════╝ ██║   ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║██╔══██╗╚══██╔══╝\n██║  ███╗██║   ██║███████║██║     ███████║██║     ███████║███████║   ██║   \n██║   ██║██║   ██║██╔══██║██║     ██╔══██║██║     ██╔══██║██╔══██║   ██║   \n╚██████╔╝╚██████╔╝██║  ██║╚██████╗██║  ██║╚██████╗██║  ██║██║  ██║   ██║   \n ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   \n');
@@ -38,12 +40,12 @@ var GuacaChat = {
 
         ifvisible.idle(function(){
             console.debug("EVENT::[IDLE]");
-//            setUserStatus("idle");
+            // setUserStatus("idle");
         });
 
         ifvisible.wakeup(function(){
             console.debug("EVENT::[AWAKE]");
-//            setUserStatus("online");
+            // setUserStatus("online");
         });
         
         // Markdown initial options
@@ -57,24 +59,62 @@ var GuacaChat = {
             smartLists: true,
             smartypants: true
         });
-
     },
 
-    _loggedIn:function(user) {
+    _loggedIn: function (user) {
         console.debug("[ACTION]::_loggedIn");
 
+        // Create Users Channel
         this.usersRef = new Firebase(GuacaConf.FIREBASE+GuacaConf.FB_USERS);
-/*
         // Generate a reference to a new location for my user with push.
-        var myUserRef = usersRef.push();
+        var myUserRef = this.usersRef.push();
         // Mark ourselves as online
         user.status = 'online';
-
+        user.chatName = user.email.split('@')[0];
+        this.userChatName = user.chatName;
         myUserRef.set(user);
+        // Remove from channel if we disconnect
         myUserRef.onDisconnect().remove();
-*/
+
         $(GuacaConf.chatScreen).show();
 
+        // Create Public msgs Channel
+        this.messagesRef = new Firebase(GuacaConf.FIREBASE+GuacaConf.FB_MESSAGES);
+
+        // Handle chat input
+        $(GuacaConf.inputElement).keypress(this.userChatName,this._handleInput);
+        // Handle messages stream
+        this.messagesRef.limit(10).on('child_added', this._handleMessages);
+    },
+
+    _handleInput: function (e) {
+        if (e.keyCode == 13) {
+            console.debug("[ACTION]::_handleInput");
+            var text = $(GuacaConf.inputElement).val();
+            var timestamp = Math.round(+new Date()/1000);
+            GuacaChat.messagesRef.push({name: e.data, text: text, ts: timestamp, origin: "user"},  function(error) {
+                if (error) {
+                    console.debug('Send ERROR');
+                    //TODO: update message stream
+                } else {
+                    // console.debug('Sent ['+text+']');
+                }
+            });
+
+            $(GuacaConf.inputElement).val('');
+        }
+    },
+
+    _handleMessages: function (snapshot) {
+        console.debug("[ACTION]::_handleInput");
+        var stream = snapshot.val();
+        var messageMarkdown = marked(stream.text);
+        var ts = timestampToDate(stream.ts);
+        var msgTpl = '<div class="talk-bubble tri-right left-top"><div class="talktext"><div>{CHANNEL}::<strong>{UserName}</strong>:</div>{Message}</div></div>';
+        msgTpl = msgTpl.replace('{UserName}', stream.name);
+        msgTpl = msgTpl.replace('{Message}', messageMarkdown);
+        $(msgTpl).appendTo($(GuacaConf.messagesElement));
+        $(GuacaConf.messagesElement)[0].scrollTop = $(GuacaConf.messagesElement)[0].scrollHeight;
     },
 
     _handleAuth: function (error, user) {
@@ -93,7 +133,7 @@ var GuacaChat = {
             var domain = user.email.split('@')[1];
             if (domain === 'lyracons.com') {
                 console.debug('ACCESS GRANTED');
-                this._loggedIn(user);
+                GuacaChat._loggedIn(user);
             } else {
                 console.debug('[ACCESS DENIED]: Not a member of Lyracons');
                 $(GuacaConf.login_errors).html('ACCESS DENIED. Only Lyracons staff is allowed');
@@ -122,10 +162,6 @@ var GuacaChat = {
         this.authRef.logout();
     },
 
-    SendMessage: function () {
-        console.debug("[ACTION]::SendMessage");
-
-    },
 };
 
 
