@@ -135,7 +135,9 @@ var GuacaChat = {
             if (domain === 'lyracons.com') {
                 console.debug('[ACCESS GRANTED]');
                 console.debug('_handleAuth:this'+this);
-                GuacaChat._loggedIn(user);
+                //GuacaChat._loggedIn(user);
+                _loggedIn(user).call(GuacaChat);
+
             } else {
                 console.debug('[ACCESS DENIED]: Not a member of Lyracons');
                 $(GuacaConf.login_errors).html('ACCESS DENIED. Only Lyracons staff is allowed');
