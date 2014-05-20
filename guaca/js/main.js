@@ -90,14 +90,15 @@ var GuacaChat = {
     _handleInput: function (e) {
         if (e.keyCode == 13) {
             console.debug("[ACTION]::_handleInput");
-            var text = $(GuacaConf.inputElement).val();
+            var text = $(GuacaConf.inputElement).val().trim();
+            if (!text) {return}
             var timestamp = Math.round(+new Date()/1000);
             GuacaChat.messagesRef.push({name: e.data, text: text, ts: timestamp, origin: "user"},  function(error) {
                 if (error) {
                     console.debug('Send ERROR');
                     //TODO: update message stream
                 } else {
-                    // console.debug('Sent ['+text+']');
+                    console.debug('Sent ['+text+']');
                 }
             });
 
@@ -132,7 +133,8 @@ var GuacaChat = {
             // Belongs to Lyracons ?
             var domain = user.email.split('@')[1];
             if (domain === 'lyracons.com') {
-                console.debug('ACCESS GRANTED');
+                console.debug('[ACCESS GRANTED]');
+                console.debug('_handleAuth:this'+this);
                 GuacaChat._loggedIn(user);
             } else {
                 console.debug('[ACCESS DENIED]: Not a member of Lyracons');
@@ -149,7 +151,8 @@ var GuacaChat = {
         console.debug("[ACTION]::Login");
 
         this.firebaseRef = new Firebase('https://blistering-fire-3276.firebaseio.com');
-        this.authRef = new FirebaseSimpleLogin(this.firebaseRef, this._handleAuth);
+        console.debug('Login:this'+this);
+        this.authRef = new FirebaseSimpleLogin(this.firebaseRef, this._handleAuth); // Closure  ?
 
         this.authRef.login('google', {
             //rememberMe: true, // Override default session length (browser session) to be 30 days
